@@ -24,8 +24,11 @@ def countLine(proj):
                 print('FileNotFoundError for '+root+'/'+f, file=sys.stderr)
     return count
 
-for root,dirs,files in os.walk(sys.argv[1]):
-    if root != sys.argv[1]: continue
-    for proj in dirs:
-        count = countLine(root+'/'+proj)
-        print(count)
+def loc(path):
+    d = {}
+    for root,dirs,files in os.walk(path):
+        if root != path: continue
+        for proj in dirs:
+            count = countLine(root+'/'+proj)
+            d[proj] = count
+    return d
