@@ -20,6 +20,8 @@ def countLine(proj):
                         count+=1
                 except UnicodeDecodeError:
                     print('exception for '+root+'/'+f, file=sys.stderr)
+            except FileNotFoundError:
+                print('FileNotFoundError for '+root+'/'+f, file=sys.stderr)
     return count
 
 for root,dirs,files in os.walk(sys.argv[1]):
