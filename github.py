@@ -44,9 +44,13 @@ output format:
 '''
 def analyze():
     result = []
-    locDict = analysis.loc('tmp')
+    print("doing loc analysis")
+    (locDict, assertDict) = analysis.loc('tmp')
+    print('doing size analysis')
     sizeDict = analysis.size('tmp')
-    assertDict = analysis.countAssert('tmp')
+    # print('doing assert analysis')
+    # assertDict = analysis.countAssert('tmp')
+    print('extracting urls')
     urlDict = analysis.url(filename)
     for k in urlDict.keys():
         d = {}
