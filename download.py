@@ -11,6 +11,8 @@ Whether --git should be provided
 
 from threading import Thread
 from subprocess import call, DEVNULL
+import util
+
 class Download:
     def __init__(self, filename, t):
         self.filename = filename
@@ -19,13 +21,11 @@ class Download:
         else:
             print('only support git')
             exit(1)
-    def getId(self, url):
-        return url.replace('https://github.com/','').replace('.git','').replace('/','-')
     def download(self):
         f = open(self.filename, 'r')
         for line in f:
             url = line.split()[0]
-            name = self.getId(url)
+            name = util.getId(url)
             command = self.prefix+url+' tmp/' + name
             DownloadThread(command).start()
         f.close()
