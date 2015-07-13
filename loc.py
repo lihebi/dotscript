@@ -14,8 +14,12 @@ def countLine(proj):
             try:
                 for line in open(root+'/' + f):
                     count+=1
-            except:
-                print('exception for '+root+'/'+f, file=sys.stderr)
+            except UnicodeDecodeError:
+                try:
+                    for line in open(root+'/'+f, encoding='latin1'):
+                        count+=1
+                except UnicodeDecodeError:
+                    print('exception for '+root+'/'+f, file=sys.stderr)
     return count
 
 for root,dirs,files in os.walk(sys.argv[1]):
