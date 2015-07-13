@@ -20,11 +20,13 @@ class Download:
             print('only support git')
             exit(1)
     def getId(self, url):
+        # FIXME vim.js.git
         return url.split('/')[-1].split('.')[0]
     def download(self):
         f = open(self.filename, 'r')
         for line in f:
             url = line.split()[0]
+            # FIXME name can be duplicate
             name = self.getId(url)
             command = self.prefix+url+' tmp/' + name
             DownloadThread(command).start()
