@@ -1,4 +1,6 @@
 *.txt
+*.json
 __pycache__
 tmp
 test.py
+.DS_Store

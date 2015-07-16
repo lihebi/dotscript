@@ -42,20 +42,20 @@ output format:
     }
 ]
 '''
-def analyze():
+def analyze(folder='tmp'):
     result = []
     print("doing loc analysis")
-    (locDict, assertDict) = analysis.loc('tmp')
+    (locDict, assertDict) = analysis.loc(folder)
     print('doing size analysis')
-    sizeDict = analysis.size('tmp')
+    sizeDict = analysis.size(folder)
     # print('doing assert analysis')
     # assertDict = analysis.countAssert('tmp')
-    print('extracting urls')
-    urlDict = analysis.url(filename)
-    for k in urlDict.keys():
+    # print('extracting urls')
+    # urlDict = analysis.url(filename)
+    for k in locDict.keys():
         d = {}
         d['name'] = k
-        d['url'] = urlDict[k]
+        # d['url'] = urlDict[k]
         d['loc'] = locDict[k]
         d['size'] = sizeDict[k]
         d['assert'] = assertDict[k]

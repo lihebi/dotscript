@@ -10,10 +10,10 @@ for root, dirs, files in os.walk(sys.argv[1]):
         if not f.endswith('.c'): continue
         for line in open(root+'/'+f):
             i+=1
-            if "assert(" in line:
+            if "assert(" in line or 'ASSERT(' in line:
                 # print os.path.abspath(root+'/'+f) + ':' + str(i) + '\t:' + line,
                 print os.path.abspath(root+'/'+f) + ':' + str(i)
-                break
+                # break
 # f = open(sys.argv[1])
 # for line in f:
     # if "assek"
