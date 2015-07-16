@@ -12,9 +12,10 @@ Whether --git should be provided
 from threading import Thread
 from subprocess import call, DEVNULL
 import util
+import sys
 
 class Download:
-    def __init__(self, filename, t):
+    def __init__(self, filename, t, directory):
         self.filename = filename
         if t == 'git':
             self.prefix = t + ' clone '
@@ -24,9 +25,10 @@ class Download:
     def download(self):
         f = open(self.filename, 'r')
         for line in f:
+            # the first component of the line should be the git url
             url = line.split()[0]
             name = util.getId(url)
-            command = self.prefix+url+' tmp/' + name
+            command = self.prefix+url+' '+directory + '/' + name
             DownloadThread(command).start()
         f.close()
 
@@ -41,3 +43,11 @@ class DownloadThread(Thread):
             print('[fail]\t' + self.command)
         else:
             print('[success]\t' + self.command)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--file', help='Url file path', required=True)
+    parser.add_argument('-t', '--type', help='git or svn', choices=['git', 'svn'], required=True)
+    args = parser.parse_args()
+
+    Download(args.file, args.type)

@@ -16,7 +16,7 @@ filename = 'repos.txt'
 def query(size):
     url = 'https://api.github.com'
     api = '/search/repositories'
-    query = 'language:C&stars:>10&per_page='+size
+    query = 'language:java&stars:>10&per_page='+size
     response = request.urlopen(url+api+"?q="+query)
     s = response.read().decode('utf8')
     j = json.loads(s)
@@ -27,8 +27,8 @@ def query(size):
     f.close()
     print('result saved to '+filename)
 
-def download():
-    Download(filename, 'git').download()
+def download(directory):
+    Download(filename, t='git', directory=directory).download()
 
 '''
 output format:
@@ -64,9 +64,9 @@ def analyze(folder='tmp'):
     print(s)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-q', '--query', help='query github api')
-parser.add_argument('-d', '--download', help='download repos', action='store_true')
-parser.add_argument('-a', '--analyze', help='analyze repos', action='store_true')
+parser.add_argument('-q', '--query', help='How many result to query github api')
+parser.add_argument('-d', '--download', help='Directory to download repos')
+parser.add_argument('-a', '--analyze', help='analyze repos')
 args = parser.parse_args()
 
 if len(sys.argv)==1:
@@ -74,6 +74,6 @@ if len(sys.argv)==1:
 if (args.query):
     query(args.query)
 if (args.download):
-    download()
+    download(args.download)
 if (args.analyze):
-    analyze()
+    analyze(args.analyze)
