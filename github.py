@@ -16,7 +16,7 @@ filename = 'repos.txt'
 def query(size):
     url = 'https://api.github.com'
     api = '/search/repositories'
-    query = 'language:java&stars:>10&per_page='+size
+    query = 'language:c&stars:>10&per_page='+size
     response = request.urlopen(url+api+"?q="+query)
     s = response.read().decode('utf8')
     j = json.loads(s)

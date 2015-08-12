@@ -21,7 +21,7 @@ def func(id):
         ls_command = ls_prefix + id + suffix
         if call(ls_command, shell=True, stdout=DEVNULL, stderr=DEVNULL) == 0:
             # Note: create tmp directory first
-            return checkout_prefix + id + suffix + " " + "tmp/" + id
+            return checkout_prefix + id + suffix + " " + "svn/" + id
     return ""
 
 class myThread(Thread):

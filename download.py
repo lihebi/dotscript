@@ -17,6 +17,7 @@ import sys
 class Download:
     def __init__(self, filename, t, directory):
         self.filename = filename
+        self.directory = directory
         if t == 'git':
             self.prefix = t + ' clone '
         else:
@@ -28,7 +29,7 @@ class Download:
             # the first component of the line should be the git url
             url = line.split()[0]
             name = util.getId(url)
-            command = self.prefix+url+' '+directory + '/' + name
+            command = self.prefix+url+' '+self.directory + '/' + name
             DownloadThread(command).start()
         f.close()
 

@@ -27,7 +27,7 @@ for line in f:
 
 # print(d)
 for k in sorted(d, key=d.get, reverse=False):
-    if (d[k]>500):
+    if (d[k]>5000):
         # print(k+':'+ d2[k] +':'+str(d[k]))
         print(d2[k])
 
